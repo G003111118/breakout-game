@@ -12,11 +12,13 @@ var y=canvas.height-30;
 var dx=2;
 var dy=-2;
 
+var ballColour = "#0095DD"
+
 //draw the ball
 function drawball(){
 	ctx.beginPath();
 	ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-	ctx.fillStyle= "#0095DD";
+	ctx.fillStyle= ballColour;
 	ctx.fill();
 	ctx.closePath();
 }
@@ -25,10 +27,14 @@ function draw() {
 	//Bounce
 	if(y+dy>canvas.height-ballRadius||y+dy<ballRadius){
 	dy=-dy;
+	ballColour="blue";
+	ballRadius=10;
 }
 
 if(x+dx>canvas.width-ballRadius||x+dx<ballRadius){
 	dx=-dx;
+	ballColour = "red";
+	ballRadius=10;
 }
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
