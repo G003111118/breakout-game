@@ -48,7 +48,7 @@ function draw() {
 	drawPaddle();
 	
 	if(rightPressed && paddleX <canvas.width-paddleWidth){
-		paddleX +=7;
+		paddleX +=20;
 	}
 	else if(leftPressed && paddleX >0) {
 		paddleX -=7;
