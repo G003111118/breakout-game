@@ -48,7 +48,7 @@ function draw() {
 	drawPaddle();
 	
 	if(rightPressed && paddleX <canvas.width-paddleWidth){
-		paddleX +=20;
+		paddleX +=7;
 	}
 	else if(leftPressed && paddleX >0) {
 		paddleX -=7;
@@ -69,8 +69,16 @@ function draw() {
 
 
 	
-	x+=dx;
-	y+=dy;
+	if(x+=dx> canvas.width-ballRadius||x+dx<ballRadius) {
+		dx= -dx;
+	}
+	if(y+=dy<ballRadius) {
+		dy= -dy;
+	} else if(y+dy>canvas.height-ballRadius) {
+		alert("Game Over");
+		document.location.reload();
+	}
+	
 } //end of draw function
 
 document.addEventListener("keydown", keyDownHandler, false);
