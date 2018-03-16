@@ -48,37 +48,33 @@ function draw() {
 	drawPaddle();
 	
 	if(rightPressed && paddleX <canvas.width-paddleWidth){
-		paddleX +=7;
+		paddleX +=20;
 	}
 	else if(leftPressed && paddleX >0) {
 		paddleX -=7;
 	}
 	
 	//Bounce
-	if(y+dy>canvas.height-ballRadius||y+dy<ballRadius){
-		dy=-dy;
+	if(x+dx>canvas.width-ballRadius||x+dx<ballRadius){
+		dx=-dx;
 		ballColour="blue";
 		ballRadius=10;
 	}
 
-	if(x+dx>canvas.width-ballRadius||x+dx<ballRadius){
-		dx=-dx;
+	if(y+dy < ballRadius){
+		dy=-dy;
 		ballColour = "red";
 		ballRadius=10;
 	}
-
-
-	
-	if(x+=dx> canvas.width-ballRadius||x+dx<ballRadius) {
-		dx= -dx;
-	}
-	if(y+=dy<ballRadius) {
-		dy= -dy;
-	} else if(y+dy>canvas.height-ballRadius) {
-		alert("Game Over");
+	else if(y+dy> canvas.height-ballRadius) {
+		alert("GAME OVER");
 		document.location.reload();
 	}
+
+
 	
+	x+=dx;
+	y+=dy;
 } //end of draw function
 
 document.addEventListener("keydown", keyDownHandler, false);
