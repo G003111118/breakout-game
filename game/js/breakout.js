@@ -48,7 +48,7 @@ function draw() {
 	drawPaddle();
 	
 	if(rightPressed && paddleX <canvas.width-paddleWidth){
-		paddleX +=20;
+		paddleX +=7;
 	}
 	else if(leftPressed && paddleX >0) {
 		paddleX -=7;
@@ -67,8 +67,14 @@ function draw() {
 		ballRadius=10;
 	}
 	else if(y+dy> canvas.height-ballRadius) {
+		//check if the ball is hitting the Paddle
+		if(x>paddleX && x<paddleX + paddleWidth) {
+			dy = -dy;
+		}
+		else{
 		alert("GAME OVER");
 		document.location.reload();
+	}
 	}
 
 
