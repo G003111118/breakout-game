@@ -32,6 +32,9 @@ var brickPadding= 10;
 var brickOffsetTop= 30;
 var brickOffsetLeft= 30;
 
+//score count
+var score= 0;
+
 //hold bricks
 var bricks= [];
 for (c=0; c<brickColumnCount; c++) {
@@ -85,6 +88,7 @@ function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawBall();
 	drawPaddle();
+	drawScore();
 	drawBricks();
 	collisionDetection();
 	
@@ -150,12 +154,22 @@ function collisionDetection() {
 	for(c=0; c<brickColumnCount; c++){
 		for(r=0; r<brickRowCount; r++) {
 			var b=bricks[c][r];
-			if(x>b.x && x<b.x+brickWidth && y>b.y && y<b.y+brickHeight) {
-				dy=-dy;
+			if(b.status==1) {
+				if(x>b.x && x<b.x+brickWidth && y>b.y && y<b.y+brickHeight) {
+					dy=-dy;
+					b.status=0;
+					score++;
+				}
 			}
 		}
 	}
 }
 
+function drawScore() {
+	ctx.font = "16px Arial";
+	ctx.fillStyle="#0095DD";
+	ctx.fillText("Score: "+score, 8, 20);
+	document.getElementById("gamescore").innerHTML = "Score: " + score;
+}
 
 setInterval(draw, 10);
