@@ -49,6 +49,9 @@ var WINNING_SOUND = new Audio('sounds/woohoo.wav');
 var SCORE_SOUND = new Audio('sounds/success.wav');
 var GAMEOVER_SOUND = new Audio('sounds/gameover.wav');
 
+//lives
+var lives = 3;
+
 //draw bricks
 	function drawBricks() {
 		for(c=0; c<brickColumnCount; c++) {
@@ -96,6 +99,10 @@ function draw() {
 	drawScore();
 	drawBricks();
 	collisionDetection();
+	drawLives();
+	
+	x+=dx;
+	y+=dy;
 	
 	if(rightPressed && paddleX <canvas.width-paddleWidth){
 		paddleX +=7;
@@ -122,26 +129,32 @@ function draw() {
 			dy = -dy;
 		}
 		else{
+			lives--;
+			if(!lives) {
 			GAMEOVER_SOUND.play();
-		alert("GAME OVER");
-		document.location.reload();
+			alert("GAME OVER");
+			document.location.reload();
+	}
+	else {
+		x=canvas.width/2;
+		y=canvas.height-30;
+		dx=2;
+		dy=-2;
+		paddleX=(canvas.width-paddleWidth)/2;
 	}
 	}
-
-
-	
-	x+=dx;
-	y+=dy;
-} //end of draw function
+	}
+}
+//end of draw function
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
-function mouseMoveHandler(e){
-	var relativeX = e.clientX-canvas.offsetLeft;
+function mouseMoveHandler(e) {
+	var relativeX = e.clientX - canvas.offsetLeft;
 	if(relativeX > 0 && relativeX < canvas.width) {
-		paddleX= relativeX - paddleWidth/2;
+		paddleX = relativeX - paddleWidth/2;
 	}
 }
 
@@ -154,12 +167,11 @@ function keyDownHandler(e) {
 	}
 }
 
-
 function keyUpHandler(e) {
-	if(e.keyCode == 39){
+	if(e.keyCode == 39) {
 		rightPressed = false;
 	}
-	else if(e.keyCode == 37){
+	else if(e.keyCode == 37) {
 		leftPressed = false;
 	}
 }
@@ -188,8 +200,15 @@ function collisionDetection() {
 function drawScore() {
 	ctx.font = "16px Arial";
 	ctx.fillStyle="#0095DD";
-	ctx.fillText("Score: "+score, 8, 20);
+	ctx.fillText=("Score: "+score, 8, 20);
 	document.getElementById("gamescore").innerHTML = "Score: " + score;
+}
+
+function drawLives() {
+	ctx.font="16px Arial";
+	ctx.fillStyle="#0095DD";
+	ctx.fillText=("Lives: "+lives, canvas.width-65, 20);
+	document.getElementById("gamelives").innerHTML="Lives: "+lives;
 }
 
 setInterval(draw, 10);
