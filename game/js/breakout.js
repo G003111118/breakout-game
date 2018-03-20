@@ -44,6 +44,11 @@ for (c=0; c<brickColumnCount; c++) {
 	}
 }
 
+//sounds
+var WINNING_SOUND = new Audio('sounds/woohoo.wav');
+var SCORE_SOUND = new Audio('sounds/success.wav');
+var GAMEOVER_SOUND = new Audio('sounds/gameover.wav');
+
 //draw bricks
 	function drawBricks() {
 		for(c=0; c<brickColumnCount; c++) {
@@ -117,6 +122,7 @@ function draw() {
 			dy = -dy;
 		}
 		else{
+			GAMEOVER_SOUND.play();
 		alert("GAME OVER");
 		document.location.reload();
 	}
@@ -130,6 +136,14 @@ function draw() {
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
+
+function mouseMoveHandler(e){
+	var relativeX = e.clientX-canvas.offsetLeft;
+	if(relativeX > 0 && relativeX < canvas.width) {
+		paddleX= relativeX - paddleWidth/2;
+	}
+}
 
 function keyDownHandler(e) {
 	if(e.keyCode == 39) {
@@ -159,18 +173,12 @@ function collisionDetection() {
 					dy=-dy;
 					b.status=0;
 					score++;
-					score++;
-					score++;
-					score++;
-					score++;
-					score++;
-					score++;
-					score++;
-					score++;
-					score++;
-			
-				
-					
+					SCORE_SOUND.play();
+						if(score == brickRowCount*brickColumnCount) {
+							WINNING_SOUND.play();
+							alert("YOU WIN, CONGRATULATIONS!");
+							document.location.reload();
+						}
 				}
 			}
 		}
