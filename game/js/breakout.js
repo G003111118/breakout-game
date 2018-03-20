@@ -159,6 +159,18 @@ function collisionDetection() {
 					dy=-dy;
 					b.status=0;
 					score++;
+					score++;
+					score++;
+					score++;
+					score++;
+					score++;
+					score++;
+					score++;
+					score++;
+					score++;
+			
+				
+					
 				}
 			}
 		}
