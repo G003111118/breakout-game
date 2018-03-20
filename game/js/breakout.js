@@ -1,13 +1,12 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-//radius of ball
-var ballRadius=10;
-
-
 //set the starting point
 var x=canvas.width/2;
 var y=canvas.height-30;
+
+//radius of ball
+var ballRadius=10;
 
 var dx=2;
 var dy=-2;
@@ -25,7 +24,7 @@ var rightPressed=false;
 var leftPressed=false;
 
 //set up bricks
-var brickRowCount= 3;
+var brickRowCount= 4;
 var brickColumnCount= 5;
 var brickWidth= 75;
 var brickHeight= 20;
@@ -43,18 +42,21 @@ for (c=0; c<brickColumnCount; c++) {
 }
 
 //draw bricks
-function drawBricks() {
-	for(c=0; c<brickColumnCount; c++) {
-		for(r=0; r<brickRowCount; r++) {
-			var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-			var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-			bricks[c][r].x=brickX;
-			bricks[c][r].y=brickY;
-			ctx.beginPath();
-			ctx.rect(brickX, brickY, brickWidth, brickHeight);
-			ctx.fillStyle="#0095DD";
-			ctx.fill();
-			ctx.closePath();
+	function drawBricks() {
+		for(c=0; c<brickColumnCount; c++) {
+			for(r=0; r<brickRowCount; r++) {
+				if(bricks[c][r].status == 1) {
+				var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+				var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+				bricks[c][r].x = brickX;
+				bricks[c][r].y = brickY;
+				ctx.beginPath();
+				ctx.rect(brickX, brickY, brickWidth, brickHeight);
+				ctx.fillStyle = "#0095DD";
+				ctx.fill();
+				ctx.closePath();
+			}
+			
 		}
 	}
 }
