@@ -24,12 +24,12 @@ var rightPressed=false;
 var leftPressed=false;
 
 //set up bricks
-var brickRowCount= 4;
-var brickColumnCount= 5;
-var brickWidth= 75;
+var brickRowCount= 5;
+var brickColumnCount= 10;
+var brickWidth= 40;
 var brickHeight= 20;
-var brickPadding= 10;
-var brickOffsetTop= 30;
+var brickPadding= 15;
+var brickOffsetTop= 10;
 var brickOffsetLeft= 30;
 
 //score count
@@ -46,8 +46,8 @@ for (c=0; c<brickColumnCount; c++) {
 
 //sounds
 var WINNING_SOUND = new Audio('sounds/woohoo.wav');
-var SCORE_SOUND = new Audio('sounds/success.wav');
-var GAMEOVER_SOUND = new Audio('sounds/gameover.wav');
+var SCORE_SOUND = new Audio('sounds/Shotgun.wav');
+var GAMEOVER_SOUND = new Audio('sounds/End_of_Game.wav');
 
 //lives
 var lives = 3;
